@@ -1,0 +1,26 @@
+option optimize_for = SPEED;
+option java_package = "routing";
+
+import "common.proto";
+import "storage.proto";
+
+message CommandMessage {
+   required Header header = 1;
+
+    oneof payload {
+      // a client (external) sanity check for testing
+      bool ping = 3;
+	
+		//msg will be used for who is the leader query from the client, 
+		//in Response objts success true(if leader is der),
+		// key:IP address , sequence_no : Port 
+      string message = 4;
+      
+      Failure err = 5;
+
+	  Query query = 6;
+	  
+	  Response response = 7;
+
+   }
+}
